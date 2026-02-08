@@ -1,0 +1,32 @@
+{
+  "name": "grok-imagine-openclaw",
+  "version": "1.0.0",
+  "description": "Generate images with Grok Imagine and send via OpenClaw",
+  "main": "scripts/grok-imagine-send.ts",
+  "scripts": {
+    "generate": "ts-node scripts/grok-imagine-send.ts",
+    "test": "echo \"Run: npm run generate '<prompt>' '<channel>' '[caption]'\""
+  },
+  "keywords": [
+    "grok",
+    "imagine",
+    "xai",
+    "aurora",
+    "fal.ai",
+    "openclaw",
+    "image-generation",
+    "ai",
+    "messaging"
+  ],
+  "dependencies": {
+    "@fal-ai/client": "^1.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
