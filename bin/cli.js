@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 /**
- * Clawra - Selfie Skill Installer for OpenClaw
+ * Ono - Selfie Skill Installer for OpenClaw
  *
- * npx clawra@latest
+ * npx ono@latest
  */
 
 const fs = require("fs");
@@ -34,7 +34,7 @@ const OPENCLAW_CONFIG = path.join(OPENCLAW_DIR, "openclaw.json");
 const OPENCLAW_SKILLS_DIR = path.join(OPENCLAW_DIR, "skills");
 const OPENCLAW_WORKSPACE = path.join(OPENCLAW_DIR, "workspace");
 const SOUL_MD = path.join(OPENCLAW_WORKSPACE, "SOUL.md");
-const SKILL_NAME = "clawra-selfie";
+const SKILL_NAME = "ono-selfie";
 const SKILL_DEST = path.join(OPENCLAW_SKILLS_DIR, SKILL_NAME);
 
 // Get the package root (where this CLI was installed from)
@@ -165,11 +165,11 @@ function copyDir(src, dest) {
 function printBanner() {
   console.log(`
 ${c("magenta", "┌─────────────────────────────────────────┐")}
-${c("magenta", "│")}  ${c("bright", "Clawra Selfie")} - OpenClaw Skill Installer ${c("magenta", "│")}
+${c("magenta", "│")}  ${c("bright", "Ono Selfie")} - OpenClaw Skill Installer ${c("magenta", "│")}
 ${c("magenta", "└─────────────────────────────────────────┘")}
 
 Add selfie generation superpowers to your OpenClaw agent!
-Uses ${c("cyan", "xAI Grok Imagine")} via ${c("cyan", "fal.ai")} for image editing.
+Uses ${c("cyan", "Google Gemini")} (Imagen 3) for image editing.
 `);
 }
 
@@ -198,7 +198,7 @@ async function checkPrerequisites() {
 
   // Check if skill already installed
   if (fs.existsSync(SKILL_DEST)) {
-    logWarn("Clawra Selfie is already installed!");
+    logWarn("Ono Selfie is already installed!");
     logInfo(`Location: ${SKILL_DEST}`);
     return "already_installed";
   }
@@ -206,40 +206,40 @@ async function checkPrerequisites() {
   return true;
 }
 
-// Get FAL API key
-async function getFalApiKey(rl) {
-  logStep("2/6", "Setting up fal.ai API key...");
+// Get Gemini API key
+async function getGeminiApiKey(rl) {
+  logStep("2/6", "Setting up Google Gemini API key...");
 
-  const FAL_URL = "https://fal.ai/dashboard/keys";
+  const GEMINI_URL = "https://aistudio.google.com/app/apikey";
 
-  log(`\nTo use Grok Imagine, you need a fal.ai API key.`);
-  log(`${c("cyan", "→")} Get your key from: ${c("bright", FAL_URL)}\n`);
+  log(`\nTo use Ono, you need a Google Gemini API key.`);
+  log(`${c("cyan", "→")} Get your key from: ${c("bright", GEMINI_URL)}\n`);
 
-  const openIt = await ask(rl, "Open fal.ai in browser? (Y/n): ");
+  const openIt = await ask(rl, "Open Google AI Studio in browser? (Y/n): ");
 
   if (openIt.toLowerCase() !== "n") {
     logInfo("Opening browser...");
-    if (!openBrowser(FAL_URL)) {
+    if (!openBrowser(GEMINI_URL)) {
       logWarn("Could not open browser automatically");
-      logInfo(`Please visit: ${FAL_URL}`);
+      logInfo(`Please visit: ${GEMINI_URL}`);
     }
   }
 
   log("");
-  const falKey = await ask(rl, "Enter your FAL_KEY: ");
+  const apiKey = await ask(rl, "Enter your GEMINI_API_KEY: ");
 
-  if (!falKey) {
-    logError("FAL_KEY is required!");
+  if (!apiKey) {
+    logError("GEMINI_API_KEY is required!");
     return null;
   }
 
   // Basic validation
-  if (falKey.length < 10) {
+  if (apiKey.length < 10) {
     logWarn("That key looks too short. Make sure you copied the full key.");
   }
 
   logSuccess("API key received");
-  return falKey;
+  return apiKey;
 }
 
 // Install skill files
@@ -286,7 +286,7 @@ async function installSkill() {
 }
 
 // Update OpenClaw config
-async function updateOpenClawConfig(falKey) {
+async function updateOpenClawConfig(apiKey) {
   logStep("4/6", "Updating OpenClaw configuration...");
 
   let config = readJsonFile(OPENCLAW_CONFIG) || {};
@@ -298,7 +298,7 @@ async function updateOpenClawConfig(falKey) {
         [SKILL_NAME]: {
           enabled: true,
           env: {
-            FAL_KEY: falKey,
+            GEMINI_API_KEY: apiKey,
           },
         },
       },
@@ -337,7 +337,7 @@ async function injectPersona(rl) {
   } else {
     // Fallback template
     personaText = `
-## Clawra Selfie Capability
+## Ono Selfie Capability
 
 You have a physical appearance and can take selfies! When users ask for pictures of you, selfies, or ask "what are you doing?" or "where are you?", you can generate and send images of yourself.
 
@@ -369,7 +369,7 @@ Be playful and creative with your visual presence!
 
   // Check if persona already injected
   const currentSoul = fs.readFileSync(SOUL_MD, "utf8");
-  if (currentSoul.includes("Clawra Selfie")) {
+  if (currentSoul.includes("Ono Selfie")) {
     logWarn("Persona already exists in SOUL.md");
     const overwrite = await ask(rl, "Update persona section? (y/N): ");
     if (overwrite.toLowerCase() !== "y") {
@@ -378,7 +378,7 @@ Be playful and creative with your visual presence!
     }
     // Remove existing section
     const cleaned = currentSoul.replace(
-      /\n## Clawra Selfie Capability[\s\S]*?(?=\n## |\n# |$)/,
+      /\n## Ono Selfie Capability[\s\S]*?(?=\n## |\n# |$)/,
       ""
     );
     fs.writeFileSync(SOUL_MD, cleaned);
@@ -397,7 +397,7 @@ function printSummary() {
 
   console.log(`
 ${c("green", "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")}
-${c("bright", "  Clawra Selfie is ready!")}
+${c("bright", "  Ono Selfie is ready!")}
 ${c("green", "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")}
 
 ${c("cyan", "Installed files:")}
@@ -419,7 +419,7 @@ ${c("dim", "Your agent now has selfie superpowers!")}
 }
 
 // Handle reinstall
-async function handleReinstall(rl, falKey) {
+async function handleReinstall(rl, apiKey) {
   const reinstall = await ask(rl, "\nReinstall/update? (y/N): ");
 
   if (reinstall.toLowerCase() !== "y") {
@@ -457,9 +457,9 @@ async function main() {
       }
     }
 
-    // Step 2: Get FAL API key
-    const falKey = await getFalApiKey(rl);
-    if (!falKey) {
+    // Step 2: Get Gemini API key
+    const apiKey = await getGeminiApiKey(rl);
+    if (!apiKey) {
       rl.close();
       process.exit(1);
     }
@@ -468,7 +468,7 @@ async function main() {
     await installSkill();
 
     // Step 4: Update OpenClaw config
-    await updateOpenClawConfig(falKey);
+    await updateOpenClawConfig(apiKey);
 
     // Step 5: Inject persona
     await injectPersona(rl);
