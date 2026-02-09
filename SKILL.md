@@ -1,12 +1,12 @@
 ---
 name: ono-selfie
-description: Edit Ono's reference image with Google Gemini (Imagen 3) and send selfies to messaging channels via OpenClaw
+description: Edit Ono's reference image with Google Gemini (Imagen 4 Fast) and send selfies to messaging channels via OpenClaw
 allowed-tools: Bash(npm:*) Bash(npx:*) Bash(openclaw:*) Bash(curl:*) Read Write WebFetch
 ---
 
 # Ono Selfie
 
-Edit a fixed reference image using Google's Gemini (Imagen 3) model and distribute it across messaging platforms (WhatsApp, Telegram, Discord, Slack, etc.) via OpenClaw.
+Edit a fixed reference image using Google's Gemini (Imagen 4 Fast) model and distribute it across messaging platforms (WhatsApp, Telegram, Discord, Slack, etc.) via OpenClaw.
 
 ## Reference Image
 
@@ -36,7 +36,7 @@ OPENCLAW_GATEWAY_TOKEN=your_token  # From: openclaw doctor --generate-gateway-to
 ### Workflow
 
 1. **Get user prompt** for how to edit the image
-2. **Edit image** via Google Gemini API (Imagen 3) with fixed reference
+2. **Edit image** via Google Gemini API (Imagen 4 Fast) with fixed reference
 3. **Extract image URL** from response
 4. **Send to OpenClaw** with target channel(s)
 
@@ -85,7 +85,7 @@ a close-up selfie taken by herself at a cozy cafe with warm lighting, direct eye
 | close-up, portrait, face, eyes, smile | `direct` |
 | full-body, mirror, reflection | `mirror` |
 
-### Step 2: Edit Image with Google Gemini (Imagen 3)
+### Step 2: Edit Image with Google Gemini (Imagen 4 Fast)
 
 Use the Google Gemini API to edit the reference image:
 

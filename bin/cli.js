@@ -169,7 +169,7 @@ ${c("magenta", "│")}  ${c("bright", "Ono Selfie")} - OpenClaw Skill Installer 
 ${c("magenta", "└─────────────────────────────────────────┘")}
 
 Add selfie generation superpowers to your OpenClaw agent!
-Uses ${c("cyan", "Google Gemini")} (Imagen 3) for image editing.
+Uses ${c("cyan", "Google Gemini")} (Imagen 4 Fast) for image editing.
 `);
 }
 

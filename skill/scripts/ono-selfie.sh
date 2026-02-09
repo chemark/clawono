@@ -49,7 +49,7 @@ echo "Generating image with prompt: $GEN_PROMPT"
 
 # Prepare payload for Gemini API (Imagen 3)
 # Endpoint: https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-001:predict
-API_URL="https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-001:predict?key=$GEMINI_API_KEY"
+API_URL="https://generativelanguage.googleapis.com/v1beta/models/imagen-4.0-fast-generate-001:predict?key=$GEMINI_API_KEY"
 
 # Build JSON payload
 JSON_PAYLOAD=$(jq -n \

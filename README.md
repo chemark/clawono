@@ -18,7 +18,7 @@ This will:
 ## What It Does
 
 Ono Selfie enables your OpenClaw agent to:
-- **Generate selfies** using Google Gemini (Imagen 3)
+- **Generate selfies** using Google Gemini (Imagen 4 Fast)
 - **Send photos** across all messaging platforms (Discord, Telegram, WhatsApp, etc.)
 - **Respond visually** to "what are you doing?" and "send a pic" requests
 
@@ -101,7 +101,7 @@ This ensures consistent appearance across all generated images.
 
 ## Technical Details
 
-- **Image Generation**: Google Gemini (Imagen 3)
+- **Image Generation**: Google Gemini (Imagen 4 Fast)
 - **Messaging**: OpenClaw Gateway API
 - **Supported Platforms**: Discord, Telegram, WhatsApp, Slack, Signal, MS Teams
 
